@@ -1,12 +1,14 @@
 const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: "inline-source-map",
   entry: path.resolve(__dirname, "index.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "index.bundle.js",
+    clean: true,
   },
   module: {
     rules: [
@@ -30,5 +32,18 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public", "index.html"),
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "public"),
+          globOptions: {
+            ignore: ["**/index.html"],
+          },
+        },
+      ],
+    }),
   ],
+  performance: {
+    hints: false,
+  },
 };
