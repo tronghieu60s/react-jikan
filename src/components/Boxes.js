@@ -1,15 +1,11 @@
 import React from "react";
 import BoxesItem from "./BoxesItem";
 
-export default function Posts() {
+export default function Posts(props) {
+  const { items } = props
   return (
-    <div className="row mt-5" data-masonry='{"percentPosition": true }'>
-      <BoxesItem />
-      <BoxesItem />
-      <BoxesItem />
-      <BoxesItem />
-      <BoxesItem />
-      <BoxesItem />
+    <div className="row mt-5">
+      <BoxesItem items={items}/>
     </div>
   );
 }
