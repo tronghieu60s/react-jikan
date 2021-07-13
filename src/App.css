@@ -8,7 +8,7 @@ body {
 
 .jikan-header {
   background-color: #1767ff;
-  padding: 0.7em 0;
+  padding: 0.9em 0;
 }
 
 .jikan-header-title {
@@ -18,7 +18,7 @@ body {
 
 .jikan-card-image {
   display: block;
-  height: 200px;
+  height: 400px;
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
