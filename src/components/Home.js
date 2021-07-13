@@ -2,7 +2,7 @@ import React from "react";
 import Boxes from "./Boxes";
 
 export default function Home(props) {
-  const { items } = props
+  const { items } = props;
   return (
     <div className="container">
       <Boxes items={items} />

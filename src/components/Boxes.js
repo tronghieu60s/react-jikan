@@ -2,10 +2,12 @@ import React from "react";
 import BoxesItem from "./BoxesItem";
 
 export default function Posts(props) {
-  const { items } = props
+  const { items } = props;
   return (
     <div className="row mt-5">
-      <BoxesItem items={items}/>
+      {items.map((item) => (
+        <BoxesItem key={item.mal_id} item={item} />
+      ))}
     </div>
   );
 }
