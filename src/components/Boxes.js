@@ -6,7 +6,9 @@ export default function Posts(props) {
   return (
     <div className="row mt-5">
       {items.map((item) => (
-        <BoxesItem key={item.mal_id} item={item} />
+        <div key={item.mal_id} className="col-6 col-md-4 col-lg-3">
+          <BoxesItem item={item} />
+        </div>
       ))}
     </div>
   );

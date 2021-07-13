@@ -6,8 +6,16 @@ body {
   padding: 0;
 }
 
+.position-top-0 {
+  bottom: 0;
+}
+
+.position-bottom-0 {
+  bottom: 0;
+}
+
 .jikan-header {
-  background-color: #1767ff;
+  background-color: #000000;
   padding: 0.9em 0;
 }
 
@@ -16,27 +24,58 @@ body {
   margin: 0;
 }
 
+.jikan-card .card-body {
+  padding: 1em 0.8em;
+}
+
 .jikan-card-image {
-  display: block;
-  height: 400px;
   background-position: center center;
-  background-size: cover;
   background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  height: 250px;
+  position: relative;
+  transition: 0.4s;
 }
 
 .jikan-card-badge {
   letter-spacing: 1px;
+  margin: 0.5em auto;
+  padding: 0 0.5em;
+  width: 100%;
+  z-index: 100;
+  position: absolute;
+}
+
+.jikan-card-time-schedule {
+  bottom: 0;
+  color: #ffffff;
+  letter-spacing: 1px;
+  padding: .1em 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 100;
+}
+
+.jikan-card-title {
+  display: block;
+  margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .jikan-footer {
-  padding: 2em 0;
   margin-top: 2em;
+  padding: 2em 0;
 }
 
 .jikan-footer-copyright {
   font-size: 0.85em;
-  text-align: center;
   letter-spacing: 1px;
+  text-align: center;
 }
 
 /* ScrollBar */
@@ -50,8 +89,8 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 2px;
   background: #2b2e34;
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
