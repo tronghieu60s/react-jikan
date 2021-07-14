@@ -5,13 +5,16 @@ import { delayLoading } from "../utils/commonFunctions";
 
 export default function HomeContainer() {
   const [isLoading, setIsLoading] = useState(true);
-  const [pagination, setPagination] = useState(1);
+  const [pagination, setPagination] = useState({
+    activePage: 1,
+    page: 1,
+  });
   const [items, setItems] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       await axios
-        .get(`https://api.jikan.moe/v3/top/anime/1/airing`)
+        .get(`https://api.jikan.moe/v3/top/anime/${pagination.page}/airing`)
         .then((res) => setItems(res.data.top))
         .catch((error) => console.log(error));
       await delayLoading();
@@ -19,7 +22,21 @@ export default function HomeContainer() {
     }
 
     fetchData();
-  }, []);
+  }, [pagination]);
 
-  return <Home items={items} isLoading={isLoading} />;
+  const nextPage = (newPage) => {
+    setPagination({
+      activePage: newPage + 1,
+      page: newPage + 1
+    })
+  }
+
+  const prevPage = (newPage) => {
+    setPagination({
+      activePage: newPage - 1,
+      page: newPage - 1
+    })
+  }
+
+  return <Home items={items} isLoading={isLoading} pagination={pagination} nextPage={nextPage} prevPage={prevPage} />;
 }
