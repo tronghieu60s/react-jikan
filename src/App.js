@@ -3,6 +3,9 @@ import Footer from "./components/Layout/Footer";
 import Header from "./components/Layout/Header";
 import HomeContainer from "./containers/Home";
 import SideBar from "./components/Layout/SideBar";
+import Page from "./components/Page";
+
+
 
 export default function App() {
   return (

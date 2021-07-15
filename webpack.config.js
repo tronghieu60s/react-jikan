@@ -4,11 +4,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   devtool: "inline-source-map",
-  entry: ["@babel/polyfill",  path.resolve(__dirname, "index.js")],
+  entry: ["@babel/polyfill", path.resolve(__dirname, "index.js")],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "index.bundle.js",
     clean: true,
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -27,6 +28,9 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
     ],
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

@@ -1,37 +1,16 @@
 import React from "react";
 import Boxes from "./Boxes";
+import Pagination from "./Pagination";
+
+
 
 export default function Home(props) {
-  const { items, isLoading, pagination, nextPage, prevPage } = props;
-
-  const { activePage, page } = pagination
+  const { items, isLoading, pagination } = props;
 
   return (
     <div className="container">
       <Boxes items={items} isLoading={isLoading} />
-      <div className="d-flex justify-content-center mt-4">
-        <nav aria-label="Page navigation example">
-          <ul className="pagination">
-            <li className="page-item">
-              <a className="page-link" href="#" aria-label="Previous" onClick={() => prevPage(page)}>
-                <i className="fa fa-angle-left"></i>
-                <span className="sr-only">Previous</span>
-              </a>
-            </li>
-
-            {activePage === 1 ? null : <li className="page-item"><a className="page-link" href="#">{activePage - 1}</a></li>}
-            <li className="page-item active"><a className="page-link" href="#">{activePage}</a></li>
-            <li className="page-item"><a className="page-link" href="#">{activePage + 1}</a></li>
-
-            <li className="page-item">
-              <a className="page-link" href="#" aria-label="Next" onClick={() => nextPage(page)}>
-                <i className="fa fa-angle-right"></i>
-                <span className="sr-only">Next</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <Pagination pagination={pagination} />
     </div>
   );
 }
