@@ -3,7 +3,6 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  devtool: "inline-source-map",
   entry: ["@babel/polyfill", path.resolve(__dirname, "index.js")],
   output: {
     clean: true,
@@ -29,10 +28,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: "React Jikan",
-      template: path.join(__dirname, "public", "index.html"),
-    }),
     new CopyWebpackPlugin({
       patterns: [
         {
