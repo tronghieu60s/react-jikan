@@ -4,11 +4,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   devtool: "inline-source-map",
-  entry: ["@babel/polyfill",  path.resolve(__dirname, "index.js")],
+  entry: ["@babel/polyfill", path.resolve(__dirname, "index.js")],
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "index.bundle.js",
     clean: true,
+    filename: "index.bundle.js",
+    path: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [
@@ -30,6 +30,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      title: "React Jikan",
       template: path.join(__dirname, "public", "index.html"),
     }),
     new CopyWebpackPlugin({

@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "serve": "webpack serve --mode development",
-    "build": "webpack --mode production",
+    "serve": "webpack serve --mode=development",
+    "build": "webpack --mode=production",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "preinstall": "npx only-allow yarn"

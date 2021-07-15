@@ -6,7 +6,7 @@ export default function Boxes(props) {
   const { items, isLoading } = props;
 
   const renderLoading = () => {
-    return [1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+    return [...Array(12).keys()].map((item) => (
       <div key={item} className="col-6 col-md-4 col-lg-3">
         <BoxesSkeleton item={item} />
       </div>

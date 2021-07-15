@@ -6,14 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./css/argon.min.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.baseUrl %>css/argon.min.css">
+    <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 
 <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script src="./js/masonry.pkgd.min.js"></script>
 </body>
 
 </html>
