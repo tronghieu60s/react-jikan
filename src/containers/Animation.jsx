@@ -1,11 +1,14 @@
-import axios from "axios";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import Pagination from "../components/Base/Pagination";
 import Boxes from "../components/Boxes";
+import RequestContext from '../contexts/RequestContext';
+import apiCaller from "../utils/apiCaller";
 import { delayLoading } from "../utils/commonFunctions";
 
 export default function AnimationContainer() {
+  const { setRequest } = useContext(RequestContext);
+
   const params = useParams();
   const query = new URLSearchParams(useLocation().search);
 
@@ -23,10 +26,10 @@ export default function AnimationContainer() {
 
     async function fetchData() {
       await delayLoading();
-      await axios
-        .get(`https://api.jikan.moe/v3/top/anime/${page}/${type}`)
-        .then((res) => setItems(res.data.top))
-        .catch((error) => console.log(error));
+      const fetchUrl = `https://api.jikan.moe/v3/top/anime/${page}/${type}`;
+      const items = await apiCaller(fetchUrl);
+      setItems(items.data.top);
+      setRequest({ url: fetchUrl, value: items.data.top });
       setIsLoading(false);
     }
   }, [type, page]);

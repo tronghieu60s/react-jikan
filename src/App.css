@@ -24,6 +24,10 @@ body {
   margin: 0;
 }
 
+.jikan-card {
+  overflow: hidden;
+}
+
 .jikan-card .card-body {
   padding: 1em 0.8em;
 }
@@ -51,7 +55,7 @@ body {
   bottom: 0;
   color: #ffffff;
   letter-spacing: 1px;
-  padding: .1em 0;
+  padding: 0.1em 0;
   position: absolute;
   text-align: center;
   width: 100%;
@@ -76,6 +80,18 @@ body {
   font-size: 0.85em;
   letter-spacing: 1px;
   text-align: center;
+}
+
+.jikan-request-code {
+  height: 200px;
+  font-size: 12px;
+  word-break: break-all;
+  overflow: auto;
+}
+
+.jikan-request-table {
+  top: 0;
+  box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
 }
 
 /* ScrollBar */

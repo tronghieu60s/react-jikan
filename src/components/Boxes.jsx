@@ -11,7 +11,7 @@ export default function Boxes(props) {
         <BoxesSkeleton item={item} />
       </div>
     ));
-  }
+  };
 
   const renderBoxes = () => {
     return items.map((item) => (
@@ -19,12 +19,9 @@ export default function Boxes(props) {
         <BoxesItem item={item} />
       </div>
     ));
-  }
+  };
 
   return (
-    < div className="row mt-5" >
-      {isLoading ? renderLoading() : renderBoxes()}
-    </div >
-
+    <div className="row">{isLoading ? renderLoading() : renderBoxes()}</div>
   );
 }

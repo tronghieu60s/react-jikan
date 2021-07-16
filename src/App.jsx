@@ -1,24 +1,25 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Footer from "./components/Layout/Footer";
 import Header from "./components/Layout/Header";
 import SideBar from "./components/Layout/SideBar";
-import Router from './Router';
+import Contexts from "./contexts";
+import Router from "./Router";
 
 export default function App() {
   return (
-    <Fragment>
+    <Contexts>
       <Header />
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-9">
+        <div className="row mt-5">
+          <div className="col-md-8">
             <Router />
           </div>
-          <div className="col-md-3">
+          <div className="col-md-4 mt-5 mt-md-0">
             <SideBar />
           </div>
         </div>
       </div>
       <Footer />
-    </Fragment>
+    </Contexts>
   );
 }
