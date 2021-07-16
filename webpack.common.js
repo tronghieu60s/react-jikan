@@ -8,6 +8,7 @@ module.exports = {
     clean: true,
     filename: "index.bundle.js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -44,7 +45,7 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ["", ".js", ".jsx"],
   },
   performance: {
     hints: false,

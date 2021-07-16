@@ -34,7 +34,9 @@ export default function AnimationContainer() {
   return (
     <Fragment>
       <Boxes items={items} isLoading={isLoading} />
-      <Pagination baseUrl={`/anime/${type}`} currentPage={page} />
+      {items.length > 0 && (
+        <Pagination baseUrl={`/anime/${type}`} currentPage={page} />
+      )}
     </Fragment>
   );
 }
