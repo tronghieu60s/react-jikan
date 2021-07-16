@@ -6,9 +6,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = merge(common, {
   mode: "development",
   devtool: "inline-source-map",
+  output: {
+    publicPath: "/",
+  },
   plugins: [
     new HtmlWebpackPlugin({
-      baseUrl: '/',
+      baseUrl: "/",
       template: path.join(__dirname, "public", "index.html"),
       title: "React Jikan Development",
     }),

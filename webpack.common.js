@@ -1,6 +1,5 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: ["@babel/polyfill", path.resolve(__dirname, "index.js")],
@@ -26,6 +25,9 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
     ],
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   plugins: [
     new CopyWebpackPlugin({

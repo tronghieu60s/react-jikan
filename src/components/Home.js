@@ -1,16 +1,16 @@
 import React from "react";
 import Boxes from "./Boxes";
+import Pagination from "./Pagination";
+
+
 
 export default function Home(props) {
-  const { items, isLoading } = props;
+  const { items, isLoading, pagination } = props;
+
   return (
     <div className="container">
       <Boxes items={items} isLoading={isLoading} />
-      <div className="d-flex justify-content-center mt-4">
-        <button type="button" className="btn btn-primary">
-          Load More
-        </button>
-      </div>
+      <Pagination pagination={pagination} />
     </div>
   );
 }

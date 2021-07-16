@@ -22,8 +22,9 @@ export default function Boxes(props) {
   }
 
   return (
-    <div className="row mt-5">
+    < div className="row mt-5" >
       {isLoading ? renderLoading() : renderBoxes()}
-    </div>
+    </div >
+
   );
 }
