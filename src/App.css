@@ -19,6 +19,22 @@ body {
   padding: 0.9em 0;
 }
 
+.jikan-header .navbar-brand {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
+.jikan-header .nav-link {
+  font-size: 0.9em;
+}
+
+.jikan-header-logo {
+  width: 1.5em;
+  border-radius: 50%;
+  margin-right: 9px;
+}
+
 .jikan-header-title {
   color: #ffffff;
   margin: 0;

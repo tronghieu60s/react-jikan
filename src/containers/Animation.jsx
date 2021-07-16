@@ -7,7 +7,7 @@ import apiCaller from "../utils/apiCaller";
 import { delayLoading } from "../utils/commonFunctions";
 
 export default function AnimationContainer() {
-  const { setRequest } = useContext(RequestContext);
+  const { setRequest, resetRequest } = useContext(RequestContext);
 
   const params = useParams();
   const query = new URLSearchParams(useLocation().search);
@@ -21,6 +21,7 @@ export default function AnimationContainer() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    resetRequest();
     setIsLoading(true);
     fetchData();
 
