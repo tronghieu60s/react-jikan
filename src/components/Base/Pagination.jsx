@@ -8,7 +8,7 @@ export default function Pagination(props) {
   return (
     <div className="d-flex justify-content-center mt-4">
       <ul className="pagination">
-        <li className="page-item">
+        <li className={`page-item${pageNum <= 1 ? ' disabled' : ''}`}>
           <Link
             to={{ pathname: baseUrl, search: `?page=${pageNum - 1}` }}
             className="page-link"

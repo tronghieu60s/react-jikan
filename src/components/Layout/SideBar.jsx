@@ -25,7 +25,7 @@ export default function SideBar() {
             {JSON.stringify(value)}
           </div>
         </div>
-        <div className="d-flex justify-content-center mt-3">
+        <div className="d-flex justify-content-center mt-3 mb-1">
           <button
             type="button"
             className="btn btn-danger btn-sm"

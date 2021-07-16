@@ -2,7 +2,7 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import Pagination from "../components/Base/Pagination";
 import Boxes from "../components/Boxes";
-import RequestContext from '../contexts/RequestContext';
+import RequestContext from "../contexts/RequestContext";
 import apiCaller from "../utils/apiCaller";
 import { delayLoading } from "../utils/commonFunctions";
 
@@ -23,14 +23,30 @@ export default function AnimationContainer() {
     window.scrollTo(0, 0);
     resetRequest();
     setIsLoading(true);
-    fetchData();
+
+    if (type === "search") {
+      searchData();
+    } else {
+      fetchData();
+    }
+
+    async function searchData() {
+      await delayLoading();
+      let q = query.get("q") || "anime";
+      q = q.length >= 3 ? q : "anime";
+      const fetchUrl = `https://api.jikan.moe/v3/search/anime?q=${q}&page=${page}`;
+      const items = await apiCaller(fetchUrl);
+      setItems(items.results);
+      setRequest({ url: fetchUrl, value: items.results });
+      setIsLoading(false);
+    }
 
     async function fetchData() {
       await delayLoading();
       const fetchUrl = `https://api.jikan.moe/v3/top/anime/${page}/${type}`;
       const items = await apiCaller(fetchUrl);
-      setItems(items.data.top);
-      setRequest({ url: fetchUrl, value: items.data.top });
+      setItems(items.top);
+      setRequest({ url: fetchUrl, value: items.top });
       setIsLoading(false);
     }
   }, [type, page]);

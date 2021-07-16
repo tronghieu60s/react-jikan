@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
     <ul className="navbar-nav mr-auto">
       <li className="nav-item">
-        <a className="nav-link" href="/">
+        <Link className="nav-link" to="/">
           Home
-        </a>
+        </Link>
       </li>
       <li className="nav-item dropdown">
         <a
@@ -18,24 +19,24 @@ export default function Navbar() {
           Anime
         </a>
         <div className="dropdown-menu" aria-labelledby="dropdownId">
-          <a className="dropdown-item" href="/anime/airing">
+          <Link className="dropdown-item" to="/anime/airing">
             Airing
-          </a>
-          <a className="dropdown-item" href="/anime/upcoming">
+          </Link>
+          <Link className="dropdown-item" to="/anime/upcoming">
             Upcoming
-          </a>
-          <a className="dropdown-item" href="/anime/tv">
+          </Link>
+          <Link className="dropdown-item" to="/anime/tv">
             TV
-          </a>
-          <a className="dropdown-item" href="/anime/movie">
+          </Link>
+          <Link className="dropdown-item" to="/anime/movie">
             Movie
-          </a>
-          <a className="dropdown-item" href="/anime/ova">
+          </Link>
+          <Link className="dropdown-item" to="/anime/ova">
             OVA
-          </a>
-          <a className="dropdown-item" href="/anime/special">
+          </Link>
+          <Link className="dropdown-item" to="/anime/special">
             Special
-          </a>
+          </Link>
         </div>
       </li>
     </ul>
