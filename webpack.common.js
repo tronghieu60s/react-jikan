@@ -1,5 +1,6 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: ["@babel/polyfill", path.resolve(__dirname, "index.js")],
@@ -30,6 +31,7 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
+    new Dotenv(),
     new CopyWebpackPlugin({
       patterns: [
         {

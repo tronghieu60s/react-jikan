@@ -4,7 +4,7 @@ import AnimationContainer from './containers/Animation';
 
 export default function DefaultRouter() {
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Route exact path={["/", "/anime/:type"]}>
           <AnimationContainer />
         </Route>
