@@ -5,8 +5,6 @@ import Pagination from "../components/Base/Pagination";
 import Boxes from "../components/Boxes";
 import { delayLoading } from "../utils/commonFunctions";
 
-const LIMIT_API = 400;
-
 export default function AnimationContainer() {
   const params = useParams();
   const query = new URLSearchParams(useLocation().search);
