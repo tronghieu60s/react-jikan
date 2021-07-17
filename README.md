@@ -2,6 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/tronghieu60s/react-jikan/master/public/images/logo.png" width="120" />
 
+![CI/CD](https://github.com/tronghieu60s/react-jikan/actions/workflows/node.js.yml/badge.svg)
 ![netlify](https://img.shields.io/netlify/ab13cc54-f87c-416c-a19c-f1605ec6c48a)
 ![version](https://img.shields.io/github/package-json/v/tronghieu60s/react-jikan)
 ![code-size](https://img.shields.io/github/languages/code-size/tronghieu60s/react-jikan)

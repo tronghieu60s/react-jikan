@@ -14,6 +14,8 @@ export default function AnimationContainer() {
 
   const type = params.type || "airing";
   const page = query.get("page") || 1;
+  let q = query.get("q") || "anime";
+  q = q.length >= 3 ? q : "anime";
 
   // hooks
   const [isLoading, setIsLoading] = useState(true);
@@ -32,8 +34,6 @@ export default function AnimationContainer() {
 
     async function searchData() {
       await delayLoading();
-      let q = query.get("q") || "anime";
-      q = q.length >= 3 ? q : "anime";
       const fetchUrl = `https://api.jikan.moe/v3/search/anime?q=${q}&page=${page}`;
       const items = await apiCaller(fetchUrl);
       setItems(items.results);
@@ -49,7 +49,7 @@ export default function AnimationContainer() {
       setRequest({ url: fetchUrl, value: items.top });
       setIsLoading(false);
     }
-  }, [type, page]);
+  }, [q, type, page]);
 
   return (
     <Fragment>
