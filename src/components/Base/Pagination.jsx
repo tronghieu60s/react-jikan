@@ -12,12 +12,10 @@ export default function Pagination(props) {
   const pageNum = parseInt(objSearch.page || "1");
   const paginate = getPaginate(maxSize, pageNum, itemSize);
 
-  const passUrl = (page) => {
-    return {
-      pathname: baseUrl,
-      search: objectToQueryParams({ ...objSearch, page }),
-    };
-  };
+  const passUrl = (page) => ({
+    pathname: baseUrl,
+    search: objectToQueryParams({ ...objSearch, page }),
+  });
 
   const isDisableLeft = () => (pageNum <= 1 ? " disabled" : "");
   const isDisableRight = () =>

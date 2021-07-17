@@ -1,11 +1,17 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import AnimationContainer from "./containers/Animation";
+import NoMatchContainer from "./containers/NoMatch";
 
 export default function DefaultRouter() {
   return (
-    <Route exact path={["/", "/anime/:type"]}>
-      <AnimationContainer />
-    </Route>
+    <Switch>
+      <Route exact path={["/", "/animation/:type/:subtype"]}>
+        <AnimationContainer />
+      </Route>
+      <Route path="*">
+        <NoMatchContainer />
+      </Route>
+    </Switch>
   );
 }
