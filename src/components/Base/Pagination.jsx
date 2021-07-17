@@ -19,10 +19,21 @@ export default function Pagination(props) {
     };
   };
 
+  const isDisableLeft = () => (pageNum <= 1 ? " disabled" : "");
+  const isDisableRight = () =>
+    pageNum >= paginate.totalPages ? " disabled" : "";
+
   return (
     <div className="d-flex justify-content-center mt-4">
       <ul className="pagination">
-        <li className={`page-item${pageNum <= 1 ? " disabled" : ""}`}>
+        <li className={`page-item${isDisableLeft()}`}>
+          <Link to={passUrl(1)} className="page-link">
+            <i className="fa fa-angle-double-left"></i>
+            <span className="sr-only">First</span>
+          </Link>
+        </li>
+
+        <li className={`page-item${isDisableLeft()}`}>
           <Link to={passUrl(pageNum - 1)} className="page-link">
             <i className="fa fa-angle-left"></i>
             <span className="sr-only">Previous</span>
@@ -40,14 +51,17 @@ export default function Pagination(props) {
           );
         })}
 
-        <li
-          className={`page-item${
-            pageNum >= paginate.totalPages ? " disabled" : ""
-          }`}
-        >
+        <li className={`page-item${isDisableRight()}`}>
           <Link to={passUrl(pageNum + 1)} className="page-link">
             <i className="fa fa-angle-right"></i>
             <span className="sr-only">Next</span>
+          </Link>
+        </li>
+
+        <li className={`page-item${isDisableRight()}`}>
+          <Link to={passUrl(paginate.totalPages)} className="page-link">
+            <i className="fa fa-angle-double-right"></i>
+            <span className="sr-only">Last</span>
           </Link>
         </li>
       </ul>

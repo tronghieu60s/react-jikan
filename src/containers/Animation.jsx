@@ -6,6 +6,10 @@ import RequestContext from "../contexts/RequestContext";
 import apiCaller from "../utils/apiCaller";
 import { delayLoading } from "../utils/commonFunctions";
 
+/* perPage items pagination */
+const perPage = 12;
+const totalPerPage = 50;
+
 export default function AnimationContainer() {
   const { setRequest, resetRequest } = useContext(RequestContext);
 
@@ -20,16 +24,16 @@ export default function AnimationContainer() {
   const [isLoading, setIsLoading] = useState(true);
   const [items, setItems] = useState([]);
 
-  async function searchData() {
+  async function searchData(page) {
     const fetchUrl = `https://api.jikan.moe/v3/search/anime?q=${q}&page=${page}`;
-    const items = await apiCaller(fetchUrl);
-    return { fetchUrl, value: items.results };
+    const fetchItems = await apiCaller(fetchUrl);
+    return { fetchUrl, value: fetchItems.results };
   }
 
-  async function fetchData() {
+  async function fetchData(page) {
     const fetchUrl = `https://api.jikan.moe/v3/top/anime/${page}/${type}`;
-    const items = await apiCaller(fetchUrl);
-    return { fetchUrl, value: items.top };
+    const fetchItems = await apiCaller(fetchUrl);
+    return { fetchUrl, value: fetchItems.top };
   }
 
   useEffect(() => {
@@ -44,15 +48,39 @@ export default function AnimationContainer() {
 
     async function requestData() {
       await delayLoading();
-      let items = { url: "", value: [] };
-      if (type === "search") {
-        items = await searchData();
-      } else {
-        items = await fetchData();
+      let fetch = { url: "", value: [] };
+
+      /* get total item in perPage and get startItems for slice array */
+      const totalItems = Math.ceil(totalPerPage / perPage);
+      const currentPage = Math.ceil(page / totalItems);
+      let startItems = (page - 1) * perPage;
+      if (startItems >= totalItems * perPage) {
+        startItems = startItems - totalItems * perPage * (currentPage - 1);
       }
 
-      setItems(items.value);
-      setRequest({ url: items.fetchUrl, value: items });
+      /* check search or get api anime */
+      if (type === "search") {
+        fetch = await searchData(currentPage);
+      } else {
+        fetch = await fetchData(currentPage);
+      }
+
+      const fetchItems = fetch.value.splice(startItems, perPage);
+      let moreFetch = [];
+      /* if not enough item in perPage, get more items in next page */
+      if (fetchItems.length !== perPage) {
+        const remainValue = perPage - fetchItems.length;
+        if (type === "search") {
+          moreFetch = await searchData(currentPage + 1);
+        } else {
+          moreFetch = await fetchData(currentPage + 1);
+        }
+        moreFetch = moreFetch.value.slice(0, remainValue);
+      }
+
+      const resultItems = [...fetchItems, ...moreFetch];
+      setItems(resultItems);
+      setRequest({ url: fetch.fetchUrl, value: resultItems });
       setIsLoading(false);
     }
   }, [q, type, page]);
@@ -60,7 +88,9 @@ export default function AnimationContainer() {
   return (
     <Fragment>
       <Boxes items={items} isLoading={isLoading} />
-      {items.length > 0 && <Pagination baseUrl={`/anime/${type}`} />}
+      {items.length > 0 && (
+        <Pagination baseUrl={`/anime/${type}`} itemSize={perPage} />
+      )}
     </Fragment>
   );
 }
