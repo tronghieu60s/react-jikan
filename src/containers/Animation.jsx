@@ -50,16 +50,28 @@ export default function AnimationContainer() {
     requestData();
 
     async function requestData() {
-      await delayLoading();
       let items = { url: "", value: [] };
+      let value = [];
       if (subtype === "search") {
         items = await jikanSearchData({ type, q, page });
+        if (items.value === undefined) {
+          setIsNotMatch(true);
+        } else {
+          value = items.value.results;
+        }
       } else {
         items = await jikanFetchData({ type, subtype, page });
+        if (items.value === undefined) {
+          setIsNotMatch(true);
+        } else {
+          value = items.value.top;
+        }
       }
 
-      setItems(items.value);
-      setRequest({ url: items.fetchUrl, value: items.value });
+      setItems(value);
+      /* delay loading utils render data */
+      await delayLoading();
+      setRequest({ url: items.fetchUrl, value });
       setIsLoading(false);
     }
   }, [q, type, subtype, page]);

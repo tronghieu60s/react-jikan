@@ -10,11 +10,11 @@ export default function apiCaller(url) {
 export async function jikanSearchData({ type, q, page }) {
   const fetchUrl = `https://api.jikan.moe/v3/search/${type}?q=${q}&page=${page}`;
   const items = await apiCaller(fetchUrl);
-  return { fetchUrl, value: items.results };
+  return { fetchUrl, value: items };
 }
 
 export async function jikanFetchData({ type, subtype, page }) {
   const fetchUrl = `https://api.jikan.moe/v3/top/${type}/${page}/${subtype}`;
   const items = await apiCaller(fetchUrl);
-  return { fetchUrl, value: items.top };
+  return { fetchUrl, value: items };
 }

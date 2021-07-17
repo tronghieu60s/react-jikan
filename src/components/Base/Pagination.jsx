@@ -7,7 +7,7 @@ import {
 } from "../../utils/commonFunctions";
 
 export default function Pagination(props) {
-  const { baseUrl, maxSize = 350, itemSize = 50 } = props;
+  const { baseUrl, maxSize = 1000, itemSize = 50 } = props;
   const objSearch = queryParamsToObject(useLocation().search);
   const pageNum = parseInt(objSearch.page || "1");
   const paginate = getPaginate(maxSize, pageNum, itemSize);
@@ -24,7 +24,7 @@ export default function Pagination(props) {
   return (
     <div className="d-flex justify-content-center mt-4">
       <ul className="pagination">
-        <li className={`page-item${isDisableLeft()}`}>
+        <li className={`d-none d-md-block page-item${isDisableLeft()}`}>
           <Link to={passUrl(1)} className="page-link">
             <i className="fa fa-angle-double-left"></i>
             <span className="sr-only">First</span>
@@ -56,7 +56,7 @@ export default function Pagination(props) {
           </Link>
         </li>
 
-        <li className={`page-item${isDisableRight()}`}>
+        <li className={`d-none d-md-block page-item${isDisableRight()}`}>
           <Link to={passUrl(paginate.totalPages)} className="page-link">
             <i className="fa fa-angle-double-right"></i>
             <span className="sr-only">Last</span>

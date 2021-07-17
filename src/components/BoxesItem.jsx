@@ -22,11 +22,6 @@ export default function BoxesItem(props) {
             {item.score}
           </span>
         </div>
-        {item.score === 0 && (
-          <div className="bg-danger jikan-card-time-schedule">
-            {item.start_date ? item.start_date : "Coming Soon"}
-          </div>
-        )}
       </a>
       <div className="card-body">
         <a className="h5 jikan-card-title" href={item.url}>
