@@ -22,6 +22,41 @@ export const queryParamsToObject = (s = "?") => {
   return {};
 };
 
+export const getPaginate = (totalItems, currentPage = 1, pageSize = 10) => {
+  const totalPages = Math.ceil(totalItems / pageSize);
+
+  var startPage, endPage;
+  if (currentPage <= 3) {
+    startPage = 1;
+    endPage = 5;
+  } else if (currentPage + 2 >= totalPages) {
+    startPage = totalPages - 4;
+    endPage = totalPages;
+  } else {
+    startPage = currentPage - 2;
+    endPage = currentPage + 2;
+  }
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+
+  const pages = [...Array(endPage + 1 - startPage).keys()].map(
+    (i) => startPage + i
+  );
+
+  return {
+    totalItems: totalItems,
+    currentPage: currentPage,
+    pageSize: pageSize,
+    totalPages: totalPages,
+    startPage: startPage,
+    endPage: endPage,
+    startIndex: startIndex,
+    endIndex: endIndex,
+    pages: pages,
+  };
+};
+
 export const copyToClipboard = (value) => {
   const el = document.createElement("textarea");
   try {
