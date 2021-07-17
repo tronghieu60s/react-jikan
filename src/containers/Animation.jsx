@@ -5,8 +5,24 @@ import Boxes from "../components/Boxes";
 import { animeSubtype, mangaSubtype } from "../const/jikan";
 import RequestContext from "../contexts/RequestContext";
 import { jikanFetchData, jikanSearchData } from "../utils/apiCaller";
-import { delayLoading } from "../utils/commonFunctions";
+import { delayLoading, capitalize } from "../utils/commonFunctions";
 import NoMatchContainer from "./NoMatch";
+
+function isNotMatchUrl({ type, subtype }) {
+  let notMatch = false;
+  if (type === "anime") {
+    if ([...animeSubtype, "search"].findIndex((o) => o === subtype) === -1) {
+      notMatch = true;
+    }
+  } else if (type === "manga") {
+    if ([...mangaSubtype, "search"].findIndex((o) => o === subtype) === -1) {
+      notMatch = true;
+    }
+  } else {
+    notMatch = true;
+  }
+  return notMatch;
+}
 
 export default function AnimationContainer() {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,66 +31,61 @@ export default function AnimationContainer() {
   const { setRequest, resetRequest } = useContext(RequestContext);
 
   const params = useParams();
+  const {type = "anime", subtype = "airing"} = params;
   const query = new URLSearchParams(useLocation().search);
 
-  const type = params.type || "anime";
-  const subtype = params.subtype || "airing";
   const page = query.get("page") || 1;
   let q = query.get("q") || "anime";
   q = q.length >= 3 ? q : "anime";
 
   useEffect(() => {
-    let notMatch = false;
-    if (type === "anime") {
-      if ([...animeSubtype, "search"].findIndex((o) => o === subtype) === -1) {
-        notMatch = true;
-      }
-    } else if (type === "manga") {
-      if ([...mangaSubtype, "search"].findIndex((o) => o === subtype) === -1) {
-        notMatch = true;
-      }
-    } else {
-      notMatch = true;
-    }
-    setIsNotMatch(notMatch);
-  }, [q, type, subtype, page]);
+    /* check correct url */
+    const isNotMatch = isNotMatchUrl({ type, subtype });
+    setIsNotMatch(isNotMatch);
 
-  useEffect(() => {
+    /* set title and scroll to top page when change value in router */
+    if (params.type) {
+      const title = `${capitalize(type)} - ${capitalize(subtype)}`;
+      document.title = `${title} | React Jikan`;
+    }
     window.scrollTo(0, 0);
     resetRequest();
 
+    /* set loading and get data from api */
     if (!isLoading) {
       setIsLoading(true);
     }
 
-    requestData();
-
-    async function requestData() {
-      let items = { url: "", value: [] };
-      let value = [];
-      if (subtype === "search") {
-        items = await jikanSearchData({ type, q, page });
-        if (items.value === undefined) {
-          setIsNotMatch(true);
-        } else {
-          value = items.value.results;
-        }
-      } else {
-        items = await jikanFetchData({ type, subtype, page });
-        if (items.value === undefined) {
-          setIsNotMatch(true);
-        } else {
-          value = items.value.top;
-        }
-      }
-
-      setItems(value);
-      /* delay loading utils render data */
-      await delayLoading();
-      setRequest({ url: items.fetchUrl, value });
-      setIsLoading(false);
+    if (!isNotMatch) {
+      requestData();
     }
   }, [q, type, subtype, page]);
+
+  async function requestData() {
+    let items = { url: "", value: [] };
+    let value = [];
+    if (subtype === "search") {
+      items = await jikanSearchData({ type, q, page });
+      if (items.value === undefined) {
+        setIsNotMatch(true);
+      } else {
+        value = items.value.results;
+      }
+    } else {
+      items = await jikanFetchData({ type, subtype, page });
+      if (items.value === undefined) {
+        setIsNotMatch(true);
+      } else {
+        value = items.value.top;
+      }
+    }
+
+    setItems(value);
+    /* delay loading utils render data */
+    await delayLoading();
+    setRequest({ url: items.fetchUrl, value });
+    setIsLoading(false);
+  }
 
   if (isNotMatch) {
     return <NoMatchContainer />;

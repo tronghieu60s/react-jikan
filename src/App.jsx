@@ -13,10 +13,10 @@ export default function App() {
         <Header />
         <div className="container-fluid">
           <div className="row mt-5">
-            <div className="col-md-8">
+            <div className="col-md-6 col-lg-8">
               <Router />
             </div>
-            <div className="col-md-4 mt-5 mt-md-0">
+            <div className="col-md-6 col-lg-4 mt-5 mt-md-0">
               <SideBar />
             </div>
           </div>

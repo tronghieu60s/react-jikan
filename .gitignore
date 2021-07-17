@@ -14,13 +14,13 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
-# nyc test coverage
+# Nyc test coverage
 .nyc_output
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
-# node-waf configuration
+# Node-waf configuration
 .lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
@@ -40,7 +40,10 @@ dist
 .node_repl_history
 .next
 
-# misc
+# Misc
 .DS_Store
 .env
 .env.local
+
+# Webstorm settings
+.idea

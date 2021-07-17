@@ -4,7 +4,11 @@ export default function apiCaller(url) {
   return axios
     .get(url)
     .then((res) => res.data)
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      if (process.env.NODE_ENV === "development") {
+        console.error(error);
+      }
+    });
 }
 
 export async function jikanSearchData({ type, q, page }) {

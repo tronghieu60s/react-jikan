@@ -9,14 +9,14 @@ export default function Boxes(props) {
     <Fragment>
       <div className={`row${!isLoading ? " d-none" : ""}`}>
         {[...Array(12).keys()].map((item) => (
-          <div key={item} className="col-6 col-md-4 col-lg-3">
+          <div key={item} className="col-6 col-sm-4 col-md-6 col-lg-3">
             <BoxesSkeleton item={item} />
           </div>
         ))}
       </div>
       <div className={`row${isLoading ? " d-none" : ""}`}>
         {items.map((item) => (
-          <div key={item.mal_id} className="col-6 col-md-4 col-lg-3">
+          <div key={item.mal_id} className="col-6 col-sm-4 col-md-6 col-lg-3">
             <BoxesItem item={item} />
           </div>
         ))}

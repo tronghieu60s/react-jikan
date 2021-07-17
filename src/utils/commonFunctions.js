@@ -3,6 +3,10 @@ export const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 const delayValue = 1500;
 export const delayLoading = () => delay(delayValue);
 
+export const capitalize = (s) => {
+  return s[0].toUpperCase() + s.slice(1);
+}
+
 export const objectToQueryParams = (o = {}) => {
   return Object.entries(o)
     .map((p) => `${encodeURIComponent(p[0])}=${encodeURIComponent(p[1])}`)
