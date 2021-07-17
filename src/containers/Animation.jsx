@@ -17,36 +17,42 @@ export default function AnimationContainer() {
   let q = query.get("q") || "anime";
   q = q.length >= 3 ? q : "anime";
 
-  // hooks
   const [isLoading, setIsLoading] = useState(true);
   const [items, setItems] = useState([]);
+
+  async function searchData() {
+    const fetchUrl = `https://api.jikan.moe/v3/search/anime?q=${q}&page=${page}`;
+    const items = await apiCaller(fetchUrl);
+    return { fetchUrl, value: items.results };
+  }
+
+  async function fetchData() {
+    const fetchUrl = `https://api.jikan.moe/v3/top/anime/${page}/${type}`;
+    const items = await apiCaller(fetchUrl);
+    return { fetchUrl, value: items.top };
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
     resetRequest();
-    setIsLoading(true);
 
-    if (type === "search") {
-      searchData();
-    } else {
-      fetchData();
+    if (!isLoading) {
+      setIsLoading(true);
     }
 
-    async function searchData() {
-      await delayLoading();
-      const fetchUrl = `https://api.jikan.moe/v3/search/anime?q=${q}&page=${page}`;
-      const items = await apiCaller(fetchUrl);
-      setItems(items.results);
-      setRequest({ url: fetchUrl, value: items.results });
-      setIsLoading(false);
-    }
+    requestData();
 
-    async function fetchData() {
+    async function requestData() {
       await delayLoading();
-      const fetchUrl = `https://api.jikan.moe/v3/top/anime/${page}/${type}`;
-      const items = await apiCaller(fetchUrl);
-      setItems(items.top);
-      setRequest({ url: fetchUrl, value: items.top });
+      let items = { url: "", value: [] };
+      if (type === "search") {
+        items = await searchData();
+      } else {
+        items = await fetchData();
+      }
+
+      setItems(items.value);
+      setRequest({ url: items.fetchUrl, value: items });
       setIsLoading(false);
     }
   }, [q, type, page]);
@@ -54,9 +60,7 @@ export default function AnimationContainer() {
   return (
     <Fragment>
       <Boxes items={items} isLoading={isLoading} />
-      {items.length > 0 && (
-        <Pagination baseUrl={`/anime/${type}`} currentPage={page} />
-      )}
+      {items.length > 0 && <Pagination baseUrl={`/anime/${type}`} />}
     </Fragment>
   );
 }

@@ -11,6 +11,10 @@ export default function Search() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (search.length === 0) return;
+    if (!new RegExp(/^[A-Za-z0-9\s]{3,}$/).test(search)) return;
+
     history.push({ pathname: "/anime/search", search: `?q=${search}` });
   };
 
@@ -26,6 +30,7 @@ export default function Search() {
         onFocus={(e) => e.target.select()}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        required
       />
       <button className="btn btn-sm btn-danger my-2 my-sm-0" type="submit">
         Search
