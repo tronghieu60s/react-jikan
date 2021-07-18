@@ -9,11 +9,13 @@ Jikan (時間) is an open-source PHP and REST API for the “most active online 
 ![code-size](https://img.shields.io/github/languages/code-size/tronghieu60s/react-jikan)
 ![license](https://img.shields.io/github/license/tronghieu60s/react-jikan)
 
+
 ## Documentation
 
-Design Documentations: https://demos.creative-tim.com/argon-dashboard-pro/docs/getting-started/overview.html
+[API Documentation](https://jikan.docs.apiary.io/)
 
-API Documentations: https://jikan.docs.apiary.io/
+[Design Documentation](https://demos.creative-tim.com/argon-dashboard-pro/docs/getting-started/overview.html)
+
 
 ## Installation
 
@@ -33,8 +35,8 @@ $ cd react-jikan
 $ yarn install
 ```
 
-## Usage
 
+## Usage
 
 Run development:
 
@@ -47,6 +49,7 @@ Run production:
 ```bash
 $ npm run build
 ```
+
 
 ## Contributing
 Pull requests and stars are highly welcome.
