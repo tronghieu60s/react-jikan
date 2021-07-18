@@ -5,7 +5,7 @@ export const delayLoading = () => delay(delayValue);
 
 export const capitalize = (s) => {
   return s[0].toUpperCase() + s.slice(1);
-}
+};
 
 export const objectToQueryParams = (o = {}) => {
   return Object.entries(o)
@@ -30,15 +30,20 @@ export const getPaginate = (totalItems, currentPage = 1, pageSize = 10) => {
   const totalPages = Math.ceil(totalItems / pageSize);
 
   var startPage, endPage;
-  if (currentPage <= 3) {
+  if (totalPages <= 5) {
     startPage = 1;
-    endPage = 5;
-  } else if (currentPage + 2 >= totalPages) {
-    startPage = totalPages - 4;
     endPage = totalPages;
   } else {
-    startPage = currentPage - 2;
-    endPage = currentPage + 2;
+    if (currentPage <= 3) {
+      startPage = 1;
+      endPage = 5;
+    } else if (currentPage + 2 >= totalPages) {
+      startPage = totalPages - 4;
+      endPage = totalPages;
+    } else {
+      startPage = currentPage - 2;
+      endPage = currentPage + 2;
+    }
   }
 
   const startIndex = (currentPage - 1) * pageSize;

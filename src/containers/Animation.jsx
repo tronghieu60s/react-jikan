@@ -63,12 +63,14 @@ export default function AnimationContainer() {
 
   async function requestData() {
     let items = { url: "", value: [] };
+    let url = "";
     let value = [];
     if (subtype === "search") {
       items = await jikanSearchData({ type, q, page });
       if (items.value === undefined) {
         setIsNotMatch(true);
       } else {
+        url = items.fetchUrl;
         value = items.value.results;
       }
     } else {
@@ -76,6 +78,7 @@ export default function AnimationContainer() {
       if (items.value === undefined) {
         setIsNotMatch(true);
       } else {
+        url = items.fetchUrl;
         value = items.value.top;
       }
     }
@@ -83,7 +86,7 @@ export default function AnimationContainer() {
     setItems(value);
     /* delay loading utils render data */
     await delayLoading();
-    setRequest({ url: items.fetchUrl, value });
+    setRequest({ url, value });
     setIsLoading(false);
   }
 

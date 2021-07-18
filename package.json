@@ -7,8 +7,7 @@
     "serve": "webpack serve --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "preinstall": "npx only-allow yarn"
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",

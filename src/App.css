@@ -109,7 +109,8 @@ body {
 }
 
 .jikan-request-table {
-  top: 0;
+  position: sticky;
+  top: 1em;
   box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
 }
 
