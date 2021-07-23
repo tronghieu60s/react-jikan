@@ -5,7 +5,7 @@ import Search from "./Search";
 export default function Header() {
   return (
     <header className="jikan-header">
-      <div className="container-fluid">
+      <div className="container">
         <nav className="navbar navbar-expand-md navbar-dark py-0">
           <a className="navbar-brand" href="/">
             <img className="jikan-header-logo" src="/images/logo.png" alt="" />

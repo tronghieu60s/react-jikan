@@ -1,7 +1,7 @@
 {
   "name": "react-jikan",
   "version": "1.0.0",
-  "description": "",
+  "description": "A List Of Anime You Should Watch It Once ><.",
   "main": "app.js",
   "scripts": {
     "serve": "webpack serve --open --config webpack.dev.js",
