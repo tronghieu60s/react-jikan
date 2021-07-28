@@ -11,7 +11,7 @@ export default function App() {
     <BrowserRouter>
       <Contexts>
         <Header />
-        <div className="container" style={{ minWidth: "1250px" }}>
+        <div className="container">
           <div className="row mt-5">
             <div className="col-md-6 col-lg-8">
               <Router />
